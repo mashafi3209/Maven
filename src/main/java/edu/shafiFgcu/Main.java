@@ -1,13 +1,30 @@
 package edu.shafiFgcu;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, CsvValidationException {
-        System.out.println("Hello It works");
-        CsvParser csvP = new CsvParser("src/Data/SEOExample.csv");
+    public static void main(String[] args) throws IOException, CsvValidationException, SQLException {
+        CsvParser csvP = new CsvParser("src/Data/bookstore_report2.csv");
         csvP.printCsv();
+
+        Gson gson = new Gson();
+        JsonReader jread = new JsonReader(new FileReader("src/Data/authors.json"));
+        AuthorParser[] authors = gson.fromJson(jread, AuthorParser[].class);
+
+        for (var element : authors) {
+            String name = element.getName();
+            String email = element.getEmail();
+            String url = element.getEmail();
+            DatabaseManager db = new DatabaseManager();
+            db.insertToAuthor(name,email,url);
+
+        }
     }
 }

@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,17 +49,25 @@ public class CsvParser {
 
   }
 
-  public void printCsv() {
+  public void printCsv() throws SQLException {
+    DatabaseManager db = new DatabaseManager();
+    ArrayList list = new ArrayList();
+
     for (Object row : fileRows) {
 
       for (String fields : (String[]) row) {
         if (fields.isEmpty()) {
           System.out.print("N/A, ");
         } else {
+          list.add(fields);
+
           System.out.print(fields + ",  ");
+
         }
 
-      } System.out.println("\n----------------------------");
+      }
+      list.clear();
+      System.out.println("\n----------------------------");
     }
   }
 }
