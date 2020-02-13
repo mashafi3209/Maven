@@ -15,9 +15,19 @@ public class DatabaseManager extends Main {
 
 
   }
+/*  public void clearTable(String table){
+    try {
+      String sql = "DELETE * FROM " + table;
+      PreparedStatement stmt = this.con.prepareStatement(sql);
+
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }*/
   public void insertToAuthor(String name, String email, String url){
     try{
-      PreparedStatement stmt = this.con.prepareStatement("INSERT INTO author (author_name, author_email, author_url) VALUES (?,?,?)");
+      PreparedStatement stmt = this.con.prepareStatement("INSERT or Ignore INTO author (author_name, author_email, author_url) VALUES (?,?,?)");
       stmt.setString(1, name);
       stmt.setString(2, email);
       stmt.setString(3, url);
@@ -35,7 +45,7 @@ public class DatabaseManager extends Main {
       String publisher_name_1 = String.valueOf(publisher_name);
       String author_name_1 = String.valueOf(author_name);
       String book_title_1 = String.valueOf(book_title);
-      PreparedStatement stmt = this.con.prepareStatement("INSERT INTO book (isbn, publisher_name, author_name,book_title) VALUES (?,?,?,?)");
+      PreparedStatement stmt = this.con.prepareStatement("INSERT or Ignore INTO book (isbn, publisher_name, author_name,book_title) VALUES (?,?,?,?)");
       stmt.setString(1, isbn_1);
       stmt.setString(2, publisher_name_1);
       stmt.setString(3, author_name_1);

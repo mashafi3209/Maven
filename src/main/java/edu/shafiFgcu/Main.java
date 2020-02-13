@@ -9,6 +9,9 @@ import java.sql.SQLException;
 public class Main {
 
     public static void main(String[] args) throws IOException, CsvValidationException, SQLException {
+        DatabaseManager db = new DatabaseManager();
+   /*     db.clearTable("book");
+        db.clearTable("author");*/
         CsvParser csvP = new CsvParser("src/Data/bookstore_report2.csv");
         csvP.pushCsv();
 
@@ -20,7 +23,7 @@ public class Main {
             String name = element.getName();
             String email = element.getEmail();
             String url = element.getEmail();
-            DatabaseManager db = new DatabaseManager();
+
             db.insertToAuthor(name,email,url);
 
         }
