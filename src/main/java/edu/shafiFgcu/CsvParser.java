@@ -49,14 +49,11 @@ public class CsvParser {
 
   }
 
-  public void printCsv() throws SQLException {
+  public void pushCsv() throws SQLException {
     DatabaseManager db = new DatabaseManager();
     ArrayList list = new ArrayList();
-
-
+    int line = 0;
     for (Object row : fileRows) {
-
-
         for (String fields : (String[]) row) {
           if (fields.isEmpty()) {
             System.out.print("N/A, ");
@@ -64,8 +61,18 @@ public class CsvParser {
             list.add(fields);
           }
         }
-        db.insertToBook(list.get(0), list.get(3), list.get(2), list.get(1));
-        list.clear();
+        if(line >0 ) {
+          db.insertToBook(list.get(0), list.get(3), list.get(2), list.get(1));
+
+        }
+        else{
+          System.out.println("First line");
+        }
+
+      list.clear();
+
+        line++;
+      System.out.println(line);
         System.out.println("\n----------------------------");
       }
     }

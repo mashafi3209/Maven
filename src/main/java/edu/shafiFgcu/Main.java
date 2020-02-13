@@ -1,9 +1,7 @@
 package edu.shafiFgcu;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, CsvValidationException, SQLException {
         CsvParser csvP = new CsvParser("src/Data/bookstore_report2.csv");
-        csvP.printCsv();
+        csvP.pushCsv();
 
         Gson gson = new Gson();
         JsonReader jread = new JsonReader(new FileReader("src/Data/authors.json"));
