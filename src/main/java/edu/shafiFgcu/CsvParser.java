@@ -53,21 +53,21 @@ public class CsvParser {
     DatabaseManager db = new DatabaseManager();
     ArrayList list = new ArrayList();
 
+
     for (Object row : fileRows) {
 
-      for (String fields : (String[]) row) {
-        if (fields.isEmpty()) {
-          System.out.print("N/A, ");
-        } else {
-          list.add(fields);
 
-          System.out.print(fields + ",  ");
-
+        for (String fields : (String[]) row) {
+          if (fields.isEmpty()) {
+            System.out.print("N/A, ");
+          } else {
+            list.add(fields);
+          }
         }
-
+        db.insertToBook(list.get(0), list.get(3), list.get(2), list.get(1));
+        list.clear();
+        System.out.println("\n----------------------------");
       }
-      list.clear();
-      System.out.println("\n----------------------------");
     }
   }
-}
+

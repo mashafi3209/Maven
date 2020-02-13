@@ -29,15 +29,17 @@ public class DatabaseManager extends Main {
 
 
   }
-  public void insertToBook(String isbn, String publisher_name, String author_name, int year, String book_title, Double price){
+  public void insertToBook(Object isbn, Object publisher_name, Object author_name, Object book_title){
     try{
-      PreparedStatement stmt = this.con.prepareStatement("INSERT INTO book (isbn, publisher_name, author_name,book_year,book_title,book_price) VALUES (?,?,?,?,?,?)");
-      stmt.setString(1, isbn);
-      stmt.setString(2, publisher_name);
-      stmt.setString(3, author_name);
-      stmt.setInt(4, year);
-      stmt.setString(5, book_title);
-      stmt.setDouble(6, price);
+      String isbn_1 = String.valueOf(isbn);
+      String publisher_name_1 = String.valueOf(publisher_name);
+      String author_name_1 = String.valueOf(author_name);
+      String book_title_1 = String.valueOf(book_title);
+      PreparedStatement stmt = this.con.prepareStatement("INSERT INTO book (isbn, publisher_name, author_name,book_title) VALUES (?,?,?,?)");
+      stmt.setString(1, isbn_1);
+      stmt.setString(2, publisher_name_1);
+      stmt.setString(3, author_name_1);
+      stmt.setString(4, book_title_1);
       stmt.execute();
 
     } catch (Exception e) {
@@ -46,9 +48,6 @@ public class DatabaseManager extends Main {
 
 
   }
-
-
-
 
 
 }
